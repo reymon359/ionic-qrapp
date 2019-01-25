@@ -5,26 +5,48 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
+
+// mapas
+import { AgmCoreModule } from '@agm/core';
+//paginas
+import { GuardadosPage, HomePage, MapaPage, TabsPage } from "../pages/index.paginas";
+
+//servicios o providers
+import { HistorialProvider } from '../providers/historial/historial';
+
+
+//pluguins
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { Contacts, Contact} from '@ionic-native/contacts';
+import { Hotspot, HotspotNetwork } from '@ionic-native/hotspot';
 
 @NgModule({
   declarations: [
-    MyApp,
-    HomePage
+    MyApp, GuardadosPage, HomePage, MapaPage, TabsPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyA9KTPtCniv71JJUg1vF58R3m1RgdmzStU'
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    HomePage
+    MyApp, GuardadosPage, HomePage, MapaPage, TabsPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    BarcodeScanner,
+    InAppBrowser,
+    Contacts,
+    Contact,
+    Hotspot,
+
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    HistorialProvider
   ]
 })
-export class AppModule {}
+export class AppModule { }
